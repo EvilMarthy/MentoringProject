@@ -1,4 +1,4 @@
-Status = {
+STATUS = {
     BURNING = 1,
     POISONED = 2,
     CONFUSED = 3,
