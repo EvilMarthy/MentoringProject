@@ -3,12 +3,11 @@ Character = {
     name = "",
     class = "",
     id = 0,
-    Stats = {
-        strength = 10,
-        agility = 10,
-        intelligence = 10,
-        charisma = 10,
-        vitality = 10
+    STATS = {
+        Strength = 10,
+        Dexterity = 10,
+        Intelligence = 10,
+        Vitality = 10
     },
     Skills = {},
 }
