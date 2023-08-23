@@ -37,3 +37,17 @@ Inventory.STOREDGEAR.WEAPONS.TYPE = {
     Shield = {}
 }
 Inventory.STOREDGEAR.OFFHAND = {}
+-- Currently equipped gear
+Inventory.GEAR = {}
+Inventory.GEAR.HEAD = ""
+Inventory.GEAR.ARMOR = ""
+Inventory.GEAR.WEAPON = ""
+Inventory.GEAR.OFFHAND = ""
+-- Inventory Functions
+
+-- does not work :thumbsup:
+Inventory.AddCurrency = function(self, type, amount)
+    local type = type
+    self.CURRENCY.type = self.CURRENCY.type + amount
+    print("You gained "..amount.." "..type.." Your new total is: "..self.CURRENCY.type)
+end
