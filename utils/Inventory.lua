@@ -1,53 +1,59 @@
-Inventory = Inventory or {}
+INVENTORY = INVENTORY or {};
 
 -- Currency for buying/selling items 
-Inventory.CURRENCY = {
+INVENTORY.Currency = {
     Gold = 0,
     BloodTokens = 0,
-    Tickets = 0
+    Tickets = 0,
 }
 -- potions that are available for consumption
-Inventory.POTIONS = {
+INVENTORY.Potions = {
     Healing = 0,
-    Mana = 0
+    Mana = 0,
 }
 -- Components for Crafting/Alchemy 
-Inventory.COMPONENTS = {}
-Inventory.COMPONENTS.ALCHEMY = {
+INVENTORY.Components = {}
+INVENTORY.Components.Alchemy = {
     Herbs = 0,
     Spices = 0,
     MonsterParts = 0,
 }
-Inventory.COMPONENTS.CRAFTING = {
+INVENTORY.Components.Crafting = {
     Iron = 0,
     Gold = 0,
     Steel = 0,
     Leather = 0,
 }
 -- Pieces of Stored Gear as "string" split by type
-Inventory.STOREDGEAR = {}
-Inventory.STOREDGEAR.HEAD = {}
-Inventory.STOREDGEAR.ARMOR = {}
-Inventory.STOREDGEAR.WEAPONS = {}
+INVENTORY.StoredGear = {}
+INVENTORY.StoredGear.HEAD = {}
+INVENTORY.StoredGear.ARMOR = {}
+INVENTORY.StoredGear.WEAPONS = {}
 -- Could be all weapons without type, but will try to implement sorting in this case for InventoryDisplay
-Inventory.STOREDGEAR.WEAPONS.TYPE = {
+INVENTORY.StoredGear.WEAPONS.TYPE = {
     Melee = {},
     Ranged = {},
     Magic = {},
-    Shield = {}
+    Shield = {},
 }
-Inventory.STOREDGEAR.OFFHAND = {}
+INVENTORY.StoredGear.OFFHAND = {}
 -- Currently equipped gear
-Inventory.GEAR = {}
-Inventory.GEAR.HEAD = ""
-Inventory.GEAR.ARMOR = ""
-Inventory.GEAR.WEAPON = ""
-Inventory.GEAR.OFFHAND = ""
--- Inventory Functions
+INVENTORY.Gear = {}
+INVENTORY.Gear.HEAD = ""
+INVENTORY.Gear.ARMOR = ""
+INVENTORY.Gear.WEAPON = ""
+INVENTORY.Gear.OFFHAND = ""
 
--- does not work :thumbsup:
-Inventory.AddCurrency = function(self, type, amount)
-    local type = type
-    self.CURRENCY.type = self.CURRENCY.type + amount
-    print("You gained "..amount.." "..type.." Your new total is: "..self.CURRENCY.type)
+-- INVENTORY Functions
+INVENTORY.AddCurrency = function( curr, gain )
+    if curr == "Gold" then
+        INVENTORY.Currency.Gold = INVENTORY.Currency.Gold + gain;
+        print(gain.." Gold has been added to your wallet. You now have a total of "..INVENTORY.Currency.Gold.." Gold.");
+    elseif curr == "BloodTokens" then
+        INVENTORY.Currency.BloodTokens = INVENTORY.Currency.BloodTokens + gain;
+        print(gain.." Blood Tokens were added to your wallet. You now have a total of "..INVENTORY.Currency.BloodTokens.." Blood Tokens.");
+    elseif curr == "Tickets" then
+        INVENTORY.Currency.Tickets = INVENTORY.Currency.Tickets + gain;
+        print(gain.." Tickets were added to your wallet. You now have a total of "..INVENTORY.Currency.Tickets.." Tickets.")
+    end
 end
