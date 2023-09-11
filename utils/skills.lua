@@ -1,28 +1,24 @@
--- Singleton Pattern
-function Class(a)
-    local skills = {}
-    skills.__index = skills
-    setmetatable skills, a)
+SKILLS = SKILLS or {}
 
-    -- Contructor for the skills object.
-    function skills.new(...)
-        if skills._instance then
-            return skills._instance
+SKILLS.skillType = {
+    Block = 0,
+    Bash = 1,
+    WeaponThrow = 2,
+    SniperFocus = 3,
+    MagicMissile = 4,
+    Barrier = 5,
+}
+SKILLS.skillList = {
+    [SKILLS.skillType.Block] = {
+        damageBlocked = math.random( 1, 10 ),
+        onUse = function ( target )
+
         end
-    skills.list = {
-        Fireball = false,
-        LightningBolt = false,
-    }
+    },
+    [SKILLS.skillType.Bash] = {
+        damageDealt = math.random( 1, 10 ),
+        onUse = function ( target )
 
-        -- I assume this is the part where if you try to build a new instance, it simply refers to the original instance rather than create a new one.
-        local instance = setmetatable({}, skills)
-        if instance.constructor then
-            instance:constructor(...)
         end
-
-     skills._instance = instance
-        return skills._instance
-    end
-
-    return skills
-end
+    },
+}
