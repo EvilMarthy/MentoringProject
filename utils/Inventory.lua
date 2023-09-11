@@ -10,41 +10,40 @@ INVENTORY.PotionType = {
     Healing = 0,
     Mana = 1,
 }
-INVENTORY.Components.CraftingMatType = {
+INVENTORY.CraftingMatType = {
     Iron = 0,
     Gold = 1,
     Steel = 2,
     Leather = 3,
 }
-INVENTORY. 
 -- Currency for wallet/inv
 INVENTORY.Currency = {
     [INVENTORY.CurrencyType.Coins] = {
         value = 0,
         onGainCallback = function( gain, currencyType )
-            print(gain.." Coins were added to your wallet. You now have a total of "..INVENTORY.Currency[currencyType].value.." Coins.");
-        end
-        onInventoryDisplay = function( container )
-            print("You currently have "..INVENTORY.Currency[currencyType].value.." "..INVENTORY.Currency[currencyType].." in your wallet")
-        end
+            print(gain.." Coins were been added to your wallet. You now have a total of "..INVENTORY.Currency[currencyType].value.." Coins.");
+        end,
+        onInventoryDisplay = function( currencyType )
+            print("You currently have "..INVENTORY.Currency[currencyType].value.." "..INVENTORY.Currency[currencyType].." in your wallet.");
+        end,
     },
     [INVENTORY.CurrencyType.BloodTokens] = {
         value = 0,
         onGainCallback = function( gain, currencyType )
             print(gain.." Blood Tokens were added to your wallet. You now have a total of "..INVENTORY.Currency[currencyType].value.." Blood Tokens.");
-        end
-        onInventoryDisplay = function( container )
-            print("You currently have "..INVENTORY.Currency[currencyType].value.." "..INVENTORY.Currency[currencyType].." in your wallet")
-        end
+        end,
+        onInventoryDisplay = function( currencyType )
+            print("You currently have "..INVENTORY.Currency[currencyType].value.." "..INVENTORY.Currency[currencyType].." in your wallet.")
+        end,
     },
     [INVENTORY.CurrencyType.Tickets] = {
         value = 0,
         onGainCallback = function( gain, currencyType )
             print(gain.." Tickets were added to your wallet. You now have a total of "..INVENTORY.Currency[currencyType].value.." Tickets.");
-        end
-        onInventoryDisplay = function( container )
-            print("You currently have "..INVENTORY.Currency[selection].value.." "..INVENTORY.Currency[selection].." in your wallet")
-        end
+        end,
+        onInventoryDisplay = function( slotType )
+            print("You currently have "..INVENTORY.Currency[slotType].value.." "..INVENTORY.Currency[slotType].." in your wallet.")
+        end,
     }
 }
 -- potions that are available for consumption
@@ -52,15 +51,21 @@ INVENTORY.Potions = {
     [INVENTORY.PotionType.Healing] = {
         value = 0,
         onGainCallback = function( gain, potionType )
-            print(gain.." were added to your inventory. You currently have "..INVENTORY.Potions[potionType].value.." "..INVENTORY.Potions[potionType])
-        end
+            print(gain.." were added to your inventory. You currently have "..INVENTORY.Potions[potionType].value.." Healing potions.");
+        end,
+        onInventoryDisplay = function( slotType )
+            print("You currently have "..INVENTORY.Potions[slotType].value.." Healing potions in your inventory.")
+        end,
     },
     [INVENTORY.PotionType.Mana] = {
         value = 0,
         onGainCallback = function( gain, potionType )
-            print(gain.." were added to your inventory. You currently have "..INVENTORY.Potions[potionType].value.." "..INVENTORY.Potions[potionType])
-        end
-    }
+            print(gain.." were added to your inventory. You currently have "..INVENTORY.Potions[potionType].value.." Mana potions");
+        end,
+        onInventoryDisplay = function( slotType )
+            print("You currently have "..INVENTORY.Potions[slotType].value.." "..INVENTORY.PotionType[slotType].." in your inventory.")
+        end,
+    },
 }
 -- Components for Crafting/Alchemy 
 INVENTORY.Components = {}
@@ -104,24 +109,26 @@ INVENTORY.AddCurrency = function( currencyType, gain )
     end
 end
 
-INVENTORY.AddPotions = function( potionType, gain )
-    local potionData = INVENTORY.Potions[potion];
+INVENTORY.AddPotions = function( potionType, amount )
+    local potionData = INVENTORY.Potions[potionType];
     if potionData then
         potionData.value = potionData.value + amount;
 
         if potionData.onGainCallback then
-            potionData.onGainCallback( gain, potionData )
+            potionData.onGainCallback(amount, potionType);
+        end
     end
-
 end
 
-INVENTORY.DisplayInventory = function( selection )
-    local displaySelection = INVENTORY[selection]
-    if displaySelection then
-        if displaySelection.onInventoryDisplay then
-            displaySelection.onInventoryDisplay( selection )
+INVENTORY.DisplayInventorySlot = function( containerType )
+    local containerData = INVENTORY[containerType]
+    if containerData then
+        if containerData.onInventoryDisplay then
+            containderData.onInventoryDisplay( containerType )
+        end
     end
 end
 
 INVENTORY.AddCurrency(INVENTORY.CurrencyType.BloodTokens, 10)
-INVENTORY.AddPotions(INVENTORY.PotionType.Healing, 2)
+INVENTORY.AddPotions(INVENTORY.PotionType.Mana, 10)
+INVENTORY.DisplayInventorySlot(INVENTORY.PotionType.Mana)
