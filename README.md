@@ -1,4 +1,6 @@
 # CMD line RPG Game
 LUA project
 
-Code looks awful and is full of commented lines, this is just a sandbox that I will build into a complete command line RPG game over time as I learn new ways.
+Most likely dropped indefinitely as I now use Love2D to make projects and learn about the language.
+
+I wanna keep this code and return to it in a while, once I feel like i've reached levels above this. May take a long time, but it'll be fun whenever it happens.
